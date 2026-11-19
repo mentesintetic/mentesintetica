@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0a0a09;
+  --color-graphite: #141311;
+  --color-line: #27251f;
+  --color-ice: #f4efe6;
+  --color-muted: #a8a196;
+  --color-brand: #F5A70F;
+  --color-brand-soft: #FFC24D;
+  --color-electric: #f2d49b;
+  --color-electric-deep: #d98e04;
+
+  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-shimmer: shimmer 2.8s ease-in-out infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes shimmer {
+    0% { transform: translateX(-120%) skewX(-20deg); }
+    60%, 100% { transform: translateX(220%) skewX(-20deg); }
+  }
+}
+
+html { overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: 88px; }
+body {
+  background: var(--color-ink);
+  color: var(--color-ice);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--color-brand); color: #0a0a09; }
+
+/* Grade de fundo sutil */
+.bg-grid {
+  background-image:
+    linear-gradient(to right, rgba(244,239,230,0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(244,239,230,0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at 50% 30%, #000 30%, transparent 75%);
+}
+
+/* Sliders da calculadora */
+.range {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 8px; border-radius: 999px; cursor: pointer;
+  background: linear-gradient(to right, var(--color-brand) 0%, var(--color-brand) var(--fill, 50%), #2b2924 var(--fill, 50%), #2b2924 100%);
+  outline: none;
+}
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 24px; height: 24px; border-radius: 999px;
+  background: #f4efe6; border: 4px solid var(--color-brand);
+  box-shadow: 0 0 18px rgba(245, 167, 15,0.65);
+  transition: transform .15s ease;
+}
+.range:active::-webkit-slider-thumb { transform: scale(1.2); }
+.range::-moz-range-thumb {
+  width: 18px; height: 18px; border-radius: 999px;
+  background: #f4efe6; border: 4px solid var(--color-brand);
+  box-shadow: 0 0 18px rgba(245, 167, 15,0.65);
+}
+.range:focus-visible { box-shadow: 0 0 0 3px rgba(242,212,155,.5); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+
+/* Brilhos com gradiente radial (bem mais leves que filter: blur) */
+.glow { background: radial-gradient(closest-side, rgba(245,167,15,var(--g,.22)), rgba(245,167,15,0) 100%); pointer-events: none; }
+.glow-cream { background: radial-gradient(closest-side, rgba(242,212,155,var(--g,.10)), rgba(242,212,155,0) 100%); pointer-events: none; }
